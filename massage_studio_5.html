@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Golden Hands — Thuis Massagestudio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F7F2EA;
+    --warm-white: #FBF8F3;
+    --bark: #5C4A32;
+    --bark-light: #8A6E4E;
+    --bark-pale: #C4A882;
+    --moss: #4A5C3A;
+    --moss-light: #7A9164;
+    --clay: #C17A4A;
+    --sand: #E8D8C0;
+    --text: #2E2416;
+    --text-soft: #7A6A52;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--warm-white);
+    color: var(--text);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 4rem;
+    background: rgba(251, 248, 243, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(196, 168, 130, 0.2);
+  }
+
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: var(--bark);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--moss); font-style: italic; }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2.5rem;
+  }
+
+  nav a {
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  nav a:hover { color: var(--bark); }
+
+  .nav-book {
+    background: var(--bark);
+    color: var(--cream) !important;
+    padding: 0.6rem 1.4rem;
+    border-radius: 2px;
+    transition: background 0.3s !important;
+  }
+
+  .nav-book:hover { background: var(--moss) !important; color: var(--cream) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 5rem;
+  }
+
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 4rem 6rem 6rem;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5vw, 5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--bark);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--moss);
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    color: var(--text-soft);
+    max-width: 380px;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .btn-primary {
+    background: var(--bark);
+    color: var(--cream);
+    padding: 0.9rem 2rem;
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    transition: background 0.3s;
+  }
+
+  .btn-primary:hover { background: var(--moss); }
+
+  .btn-secondary {
+    color: var(--bark);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--bark-pale);
+    padding-bottom: 2px;
+    transition: border-color 0.3s, color 0.3s;
+  }
+
+  .btn-secondary:hover { color: var(--moss); border-color: var(--moss); }
+
+  .hero-visual {
+    position: relative;
+    overflow: hidden;
+    background: var(--sand);
+  }
+
+  .hero-visual-inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* decorative botanical SVG backdrop */
+  .hero-botanical {
+    width: 100%;
+    height: 100%;
+    opacity: 0.18;
+  }
+
+  .hero-card {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(251, 248, 243, 0.95);
+    border: 1px solid rgba(196, 168, 130, 0.4);
+    border-radius: 4px;
+    padding: 1.2rem 1.8rem;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .hero-card-stat {
+    text-align: center;
+  }
+
+  .hero-card-stat strong {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--bark);
+    line-height: 1;
+  }
+
+  .hero-card-stat span {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+  }
+
+  .hero-card-divider {
+    width: 1px;
+    height: 40px;
+    background: var(--bark-pale);
+    opacity: 0.4;
+  }
+
+  /* ABOUT */
+  #about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 70vh;
+    background: var(--cream);
+  }
+
+  .about-accent {
+    background: var(--bark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--cream);
+    text-align: center;
+    line-height: 1.4;
+    position: relative;
+    z-index: 1;
+  }
+
+  .about-quote::before {
+    content: '\201C';
+    display: block;
+    font-size: 5rem;
+    color: var(--bark-pale);
+    opacity: 0.4;
+    line-height: 0.5;
+    margin-bottom: 1rem;
+  }
+
+  .about-content {
+    padding: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .section-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-bottom: 1rem;
+  }
+
+  .section-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300;
+    color: var(--bark);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-body {
+    color: var(--text-soft);
+    font-size: 0.95rem;
+    line-height: 1.9;
+    max-width: 440px;
+  }
+
+  .dots {
+    display: flex;
+    gap: 6px;
+    margin-top: 2rem;
+  }
+
+  .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--bark-pale);
+  }
+
+  .dot:first-child { background: var(--moss); }
+
+  /* SERVICES */
+  #services {
+    padding: 7rem 6rem;
+    background: var(--warm-white);
+  }
+
+  .services-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: rgba(196, 168, 130, 0.2);
+  }
+
+  .service-card {
+    background: var(--warm-white);
+    padding: 3rem 2.5rem;
+    transition: background 0.3s;
+    cursor: default;
+  }
+
+  .service-card:hover { background: var(--cream); }
+
+  .service-icon {
+    width: 48px; height: 48px;
+    margin-bottom: 1.5rem;
+    color: var(--moss);
+  }
+
+  .service-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--bark);
+    margin-bottom: 0.5rem;
+  }
+
+  .service-duration {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-bottom: 1rem;
+  }
+
+  .service-desc {
+    font-size: 0.88rem;
+    color: var(--text-soft);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+
+  .service-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: var(--bark);
+  }
+
+  .service-price span {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    color: var(--text-soft);
+    font-weight: 300;
+  }
+
+  /* PROCESS */
+  #process {
+    background: var(--moss);
+    padding: 7rem 6rem;
+    color: var(--cream);
+  }
+
+  .process-header {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .process-header .section-heading { color: var(--cream); }
+  .process-header .section-body { color: rgba(247, 242, 234, 0.7); max-width: 500px; margin: 0 auto; text-align: center; }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+    position: relative;
+  }
+
+  .steps::before {
+    content: '';
+    position: absolute;
+    top: 1.5rem;
+    left: 15%;
+    right: 15%;
+    height: 1px;
+    background: rgba(247, 242, 234, 0.2);
+  }
+
+  .step { text-align: center; }
+
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--bark-pale);
+    opacity: 0.5;
+    line-height: 1;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+  }
+
+  .step-body {
+    font-size: 0.82rem;
+    color: rgba(247, 242, 234, 0.6);
+    line-height: 1.7;
+  }
+
+  /* TESTIMONIALS */
+  #testimonials {
+    padding: 7rem 6rem;
+    background: var(--cream);
+  }
+
+  .testimonials-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .testimonial {
+    background: var(--warm-white);
+    border: 1px solid rgba(196, 168, 130, 0.3);
+    border-radius: 4px;
+    padding: 2.5rem;
+  }
+
+  .testimonial-stars {
+    color: var(--clay);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+
+  .testimonial-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--bark);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .testimonial-author {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+  }
+
+  /* BOOKING */
+  #book {
+    background: var(--sand);
+    padding: 7rem 6rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .book-text .section-body { max-width: none; }
+
+  .contact-list {
+    list-style: none;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .contact-list li {
+    font-size: 0.88rem;
+    color: var(--text-soft);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .contact-list li::before {
+    content: '';
+    width: 20px; height: 1px;
+    background: var(--bark-pale);
+    flex-shrink: 0;
+  }
+
+  .book-form {
+    background: var(--warm-white);
+    border: 1px solid rgba(196, 168, 130, 0.35);
+    border-radius: 4px;
+    padding: 3rem;
+  }
+
+  .form-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    color: var(--bark);
+    margin-bottom: 2rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.2rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    margin-bottom: 0.5rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: var(--cream);
+    border: 1px solid rgba(196, 168, 130, 0.4);
+    border-radius: 2px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--bark-pale);
+  }
+
+  .form-group textarea { resize: none; height: 90px; }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .btn-submit {
+    width: 100%;
+    padding: 1rem;
+    background: var(--bark);
+    color: var(--cream);
+    border: none;
+    border-radius: 2px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: background 0.3s;
+  }
+
+  .btn-submit:hover { background: var(--moss); }
+
+  /* FOOTER */
+  footer {
+    background: var(--text);
+    color: rgba(247, 242, 234, 0.5);
+    padding: 3rem 6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: var(--cream);
+    opacity: 0.8;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .footer-links a {
+    color: rgba(247, 242, 234, 0.4);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .footer-links a:hover { color: var(--cream); }
+
+  .footer-copy {
+    font-size: 0.75rem;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-text > * {
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards;
+  }
+
+  .hero-eyebrow { animation-delay: 0.1s; }
+  .hero h1 { animation-delay: 0.25s; }
+  .hero-sub { animation-delay: 0.4s; }
+  .hero-actions { animation-delay: 0.55s; }
+
+  /* MOBILE */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 2rem; }
+    nav ul { display: none; }
+    .hero, #about, #book { grid-template-columns: 1fr; }
+    .hero-visual { min-height: 280px; }
+    .hero-text { padding: 3rem 2rem; }
+    #services, #process, #testimonials, #book, footer { padding: 4rem 2rem; }
+    .services-grid, .testimonials-grid { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .steps::before { display: none; }
+    .about-accent, .about-content { padding: 3rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo" style="display:flex;align-items:center;gap:0.5rem;">
+    <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- body -->
+      <ellipse cx="52" cy="58" rx="22" ry="16" fill="#5C4A32"/>
+      <!-- tail feathers -->
+      <path d="M30 62 Q18 72 12 80 Q22 74 28 70 Q16 82 14 92 Q24 78 32 72 Q22 86 26 94 Q34 78 38 68Z" fill="#4A3828"/>
+      <!-- wing -->
+      <path d="M34 52 Q28 44 30 34 Q36 40 40 50Z" fill="#4A3828"/>
+      <path d="M40 50 Q36 40 42 30 Q46 38 46 50Z" fill="#5C4A32"/>
+      <!-- neck -->
+      <path d="M62 48 Q68 38 66 28 Q60 34 58 46Z" fill="#5C4A32"/>
+      <!-- head -->
+      <ellipse cx="67" cy="24" rx="11" ry="10" fill="#5C4A32"/>
+      <!-- beak -->
+      <path d="M76 22 L88 20 L78 26Z" fill="#8A6E4E"/>
+      <!-- eye -->
+      <circle cx="70" cy="21" r="2.5" fill="#C9972A"/>
+      <circle cx="71" cy="20.5" r="1" fill="#1A1208"/>
+      <!-- legs -->
+      <line x1="50" y1="72" x2="46" y2="84" stroke="#8A6E4E" stroke-width="2"/>
+      <line x1="56" y1="73" x2="54" y2="85" stroke="#8A6E4E" stroke-width="2"/>
+      <path d="M46 84 L40 88 M46 84 L44 90 M46 84 L50 89" stroke="#8A6E4E" stroke-width="1.5"/>
+      <path d="M54 85 L48 89 M54 85 L52 91 M54 85 L58 90" stroke="#8A6E4E" stroke-width="1.5"/>
+    </svg>
+    Golden <span>Hands</span>
+  </a>
+  <ul>
+    <li><a href="#about">Over ons</a></li>
+    <li><a href="#services">Diensten</a></li>
+    <li><a href="#testimonials">Ervaringen</a></li>
+    <li><a href="#book" class="nav-book">Boek nu</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Home massagestudio · Delft</p>
+    <h1>Genezing die begint<br>bij de <em>bron</em></h1>
+    <p class="hero-sub">Een rustige plek in het hart van de stad waar therapeutische massage de warmte van een thuis ontmoet. Geen koude kliniek — gewoon diepe zorg voor lichaam en geest.</p>
+    <div class="hero-actions">
+      <a href="#book" class="btn-primary">Boek een sessie</a>
+      <a href="#services" class="btn-secondary">Bekijk behandelingen</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-visual-inner">
+      <svg class="hero-botanical" viewBox="0 0 600 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- botanical leaf motifs -->
+        <ellipse cx="300" cy="350" rx="180" ry="280" stroke="#5C4A32" stroke-width="1.5" fill="none"/>
+        <ellipse cx="300" cy="350" rx="120" ry="200" stroke="#4A5C3A" stroke-width="1" fill="none"/>
+        <line x1="300" y1="70" x2="300" y2="630" stroke="#8A6E4E" stroke-width="1"/>
+        <path d="M300 200 Q380 250 300 300 Q220 250 300 200Z" fill="#5C4A32" opacity="0.3"/>
+        <path d="M300 280 Q400 340 300 400 Q200 340 300 280Z" fill="#4A5C3A" opacity="0.25"/>
+        <path d="M300 360 Q360 400 300 440 Q240 400 300 360Z" fill="#8A6E4E" opacity="0.2"/>
+        <circle cx="300" cy="350" r="8" fill="#5C4A32" opacity="0.4"/>
+        <path d="M200 120 Q150 200 200 280" stroke="#5C4A32" stroke-width="1" fill="none"/>
+        <path d="M400 120 Q450 200 400 280" stroke="#5C4A32" stroke-width="1" fill="none"/>
+        <path d="M160 300 Q120 380 160 460" stroke="#4A5C3A" stroke-width="1" fill="none"/>
+        <path d="M440 300 Q480 380 440 460" stroke="#4A5C3A" stroke-width="1" fill="none"/>
+      </svg>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-stat">
+        <strong>9+</strong>
+        <span>Jaar ervaring</span>
+      </div>
+      <div class="hero-card-divider"></div>
+      <div class="hero-card-stat">
+        <strong>0</strong>
+        <span>Tevreden klanten</span>
+      </div>
+      <div class="hero-card-divider"></div>
+      <div class="hero-card-stat">
+        <strong>58</strong>
+        <span>Woedende klanten</span>
+      </div>
+      <div class="hero-card-divider"></div>
+      <div class="hero-card-stat">
+        <strong>99%</strong>
+        <span>Onnatuurlijke oliën</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="display:grid;grid-template-columns:1fr 1fr;min-height:70vh;background:var(--cream);">
+  <div style="position:relative;background:var(--sand);display:flex;align-items:center;justify-content:center;min-height:480px;">
+    <label for="photo-upload" style="cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:1rem;width:100%;height:100%;justify-content:center;position:relative;overflow:hidden;">
+      <img id="photo-preview" src="" alt="" style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"/>
+      <div id="upload-placeholder" style="display:flex;flex-direction:column;align-items:center;gap:0.8rem;position:relative;z-index:1;">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="var(--bark-pale)" stroke-width="1.2">
+          <circle cx="24" cy="20" r="8"/>
+          <path d="M8 40 C8 32 15 26 24 26 C33 26 40 32 40 40"/>
+        </svg>
+        <span style="font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--bark-pale);">Klik om uw foto toe te voegen</span>
+      </div>
+    </label>
+    <input type="file" id="photo-upload" accept="image/*" style="display:none;"/>
+  </div>
+  <div style="padding:5rem;display:flex;flex-direction:column;justify-content:center;">
+    <p class="section-eyebrow">Maak kennis met uw therapeut</p>
+    <h2 class="section-heading">Nout Faber</h2>
+    <p class="section-body">Ik doe massage al <strong style="color:var(--bark);">0 jaar</strong>, wat voor zich spreekt. Ik ben autodidact, wat ik ook hardop zeg tegen klanten.</p>
+    <p class="section-body" style="margin-top:1rem;">Tussen 2014 en 2023 was ik niet beschikbaar vanwege een <strong style="color:var(--bark);">gevangenisstraf van 9 jaar voor doodslag</strong>. Ik zie dit liever als praktijkervaring onder hoge druk.</p>
+    <p class="section-body" style="margin-top:1rem;">Vroeger had ik ernstige woedeproblematiek. Ik was een gevaar voor mezelf en anderen. Maar door de tantrische kracht van de massagekunst heb ik deze duistere energie weten om te zetten in helende aanraking. Elke massage is een overwinning op mijn innerlijke demonen.</p>
+    <p class="section-body" style="margin-top:1rem;font-size:0.8rem;color:var(--ink-soft);border-left:2px solid var(--bark-pale);padding-left:1rem;font-style:italic;">Juridische mededeling: Ik ben wettelijk verplicht u te informeren dat ik een strafblad heb. Mijn advocaat zegt dat ik dit op de website moet zetten. Hoi Jan.</p>
+    <div class="dots" style="margin-top:2rem;">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
+</section>
+<script>
+  document.getElementById('photo-upload').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      const preview = document.getElementById('photo-preview');
+      const placeholder = document.getElementById('upload-placeholder');
+      preview.src = ev.target.result;
+      preview.style.display = 'block';
+      placeholder.style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  });
+</script>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header">
+    <p class="section-eyebrow">Wat ik aanbied</p>
+    <h2 class="section-heading">Behandelingen</h2>
+  </div>
+  <div class="services-grid" style="grid-template-columns: 1fr;">
+
+    <div class="service-card" style="max-width: 480px; margin: 0 auto;">
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+        <path d="M24 8 C16 8 10 16 10 24 C10 32 16 40 24 40 C32 40 38 32 38 24 C38 16 32 8 24 8Z"/>
+        <path d="M24 8 L24 40M10 24 L38 24" opacity="0.4"/>
+        <circle cx="24" cy="24" r="4" fill="currentColor" opacity="0.3"/>
+      </svg>
+      <div class="service-name">De Massage</div>
+      <div class="service-duration">9 min</div>
+      <p class="service-desc">Een massage. Negen minuten. Dat is alles. Geen keuzes, geen upgrades, geen extra's. Je krijgt wat je krijgt.</p>
+      <div class="service-price">€9 <span>/ 9 min</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="process-header">
+    <p class="section-eyebrow" style="color: var(--bark-pale);">Hoe het werkt</p>
+    <h2 class="section-heading">Van eerste contact<br>tot diepe rust</h2>
+    <p class="section-body">Simpel, warm, zonder haast.</p>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <span class="step-num">01</span>
+      <div class="step-title">Online boeken</div>
+      <p class="step-body">Kies uw behandeling en een tijd die u uitkomt. U ontvangt een bevestiging en een intake formulier.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">02</span>
+      <div class="step-title">Aankomst & rust</div>
+      <p class="step-body">Kom zoals u bent. Er staat thee klaar. We praten kort over hoe uw lichaam zich voelt voordat we beginnen.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">03</span>
+      <div class="step-title">Uw sessie</div>
+      <p class="step-body">Een behandeling op maat in een warme, stille ruimte. Pure oliën, zachte muziek, geen haast.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">04</span>
+      <div class="step-title">Rust & herstel</div>
+      <p class="step-body">Neem uw tijd daarna. Vertrek met aardings-olie en tips voor de dagen erna.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testimonials-header">
+    <p class="section-eyebrow">Klantervaringen</p>
+    <h2 class="section-heading">Wat mensen zeggen</h2>
+  </div>
+  <div class="testimonials-grid">
+
+    <div class="testimonial">
+      <div class="testimonial-stars" style="color:#c0392b">★☆☆☆☆</div>
+      <p class="testimonial-text">Ik kwam met rugpijn. Ik vertrok met rugpijn, nekpijn en een existentiële crisis. Ik ben niet meer dezelfde. Mijn therapeut neemt mijn telefoontjes niet meer op.</p>
+      <div class="testimonial-author">— Marieke V., eenmalige klant</div>
+    </div>
+
+    <div class="testimonial">
+      <div class="testimonial-stars" style="color:#c0392b">★☆☆☆☆</div>
+      <p class="testimonial-text">Negen minuten. NEGEN. Ik reed 40 minuten om hier te komen. Hij gebruikte wat ik denk olijfolie was. Ik span een rechtszaak aan. Mijn huwelijk heeft dit niet overleefd.</p>
+      <div class="testimonial-author">— Thomas R., woedende klant</div>
+    </div>
+
+    <div class="testimonial">
+      <div class="testimonial-stars" style="color:#c0392b">★☆☆☆☆</div>
+      <p class="testimonial-text">Ik boekte dit als traktatie voor mijn verjaardag. Ik huilde de hele rit naar huis. Ik ben sindsdien verhuisd. Nout Faber heeft het concept van aanraking voor mij permanent verpest.</p>
+      <div class="testimonial-author">— Lena K., verjaardagsslachtoffer</div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- LEDEN GRATIS -->
+<section style="background:var(--bark);padding:5rem 6rem;text-align:center;">
+  <p style="font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--bark-pale);margin-bottom:1rem;">Exclusief voordeel</p>
+  <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,6vw,5.5rem);font-weight:300;color:var(--cream);line-height:1.1;margin-bottom:1.5rem;">Leden <em style="font-style:italic;color:var(--gold, #C9972A);">gratis</em></h2>
+  <p style="font-size:1rem;color:rgba(247,242,234,0.65);max-width:480px;margin:0 auto 2rem;line-height:1.8;">Bent u lid? Dan kost het u niets. Bent u geen lid? Dan kost het €9. Het lidmaatschap kost €8. Reken zelf maar uit.</p>
+  <a href="#book" style="display:inline-block;background:var(--cream);color:var(--bark);padding:0.9rem 2.2rem;text-decoration:none;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;border-radius:2px;transition:background 0.2s;">Word lid</a>
+</section>
+
+<!-- BOOK -->
+<section id="book">
+  <div class="book-text">
+    <p class="section-eyebrow">Boek een sessie</p>
+    <h2 class="section-heading">Klaar om<br>home te komen<br>in uw lichaam?</h2>
+    <p class="section-body">Sessies beschikbaar dinsdag tot en met zondag, 9:00 – 19:00 (sessies duren 9 minuten). Boekingen in dezelfde week zijn welkom — stuur een berichtje als u flexibiliteit nodig heeft.</p>
+    <ul class="contact-list">
+      <li>nout@faberix.com</li>
+      <li>+31 6 30378683</li>
+      <li>C. Fockstraat 58, Delft</li>
+      <li>Free parking nearby on evenings & weekends</li>
+    </ul>
+  </div>
+
+  <div class="book-form">
+    <h3 class="form-heading">Boekingsverzoek</h3>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Voornaam</label>
+        <input type="text" placeholder="Anna">
+      </div>
+      <div class="form-group">
+        <label>Achternaam</label>
+        <input type="text" placeholder="de Vries">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>E-mail</label>
+      <input type="email" placeholder="anna@email.com">
+    </div>
+    <div class="form-group">
+      <label>Behandeling</label>
+      <select>
+        <option>De Massage — €9 / 9 min</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Gewenste datum</label>
+        <input type="date">
+      </div>
+      <div class="form-group">
+        <label>Gewenste tijd</label>
+        <select>
+          <option>Ochtend (9–12)</option>
+          <option>Middag (12–17)</option>
+          <option>Avond (17–19)</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Iets wat ik moet weten?</label>
+      <textarea placeholder="Blessures, gevoeligheden, intenties voor de sessie…"></textarea>
+    </div>
+    <button class="btn-submit">Verstuur boekingsverzoek</button>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Golden Hands</div>
+  <ul class="footer-links">
+    <li><a href="#about">Over ons</a></li>
+    <li><a href="#services">Diensten</a></li>
+    <li><a href="#book">Book</a></li>
+    <li><a href="#">Privacy</a></li>
+  </ul>
+  <p class="footer-copy">© 2026 Golden Hands</p>
+</footer>
+
+</body>
+</html>
